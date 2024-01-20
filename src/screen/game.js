@@ -10,20 +10,16 @@ const Game = () => {
   const [gameOver, setGameOver] = useState(false);
 
   useEffect(() => {
-    if (gameOver) {
-      setTimeout(() => {
-        if (gameOver === "draw") {
-          // Oyun berabere kaldığında sadece yeniden başlat
-          resetGame();
-        }
-      }, 3000); // 3 saniye sonra oyunu sıfırla
-    } else if (currentPlayer === "Yellow") {
+    if (gameOver === "draw") {
+      // Oyun berabere kaldığında sadece yeniden başlat
+      resetGame();
+    } else if (currentPlayer === "Yellow" && !gameOver) {
       // Bilgisayarın hamlesi
       setTimeout(() => {
         makeComputerMove(grid);
       }, 100); // Bilgisayarın hamlesi 100 milisaniye sonra yapılır
     }
-  }, [gameOver, currentPlayer]);
+  }, [gameOver, currentPlayer, grid]);
 
   function createEmptyGrid() {
     return Array(ROWS)
@@ -90,8 +86,8 @@ const Game = () => {
     }
   }
 
-  // Kazananı kontrol et
-  function checkForWin(grid, row, col, player) {
+ // Kazananı kontrol et
+function checkForWin(grid, row, col, player) {
     return (
       checkVertical(grid, row, col, player) ||
       checkHorizontal(grid, row, col, player) ||
@@ -99,7 +95,7 @@ const Game = () => {
       checkDiagonalLeft(grid, row, col, player)
     );
   }
-
+  
   // Dikey kontrol
   function checkVertical(grid, row, col, player) {
     let count = 1;
@@ -115,7 +111,7 @@ const Game = () => {
     }
     return count >= WINNING_LENGTH;
   }
-
+  
   // Yatay kontrol
   function checkHorizontal(grid, row, col, player) {
     let count = 1;
@@ -131,7 +127,7 @@ const Game = () => {
     }
     return count >= WINNING_LENGTH;
   }
-
+  
   // Sağ çapraz kontrol
   function checkDiagonalRight(grid, row, col, player) {
     let count = 1;
@@ -151,7 +147,7 @@ const Game = () => {
     }
     return count >= WINNING_LENGTH;
   }
-
+  
   // Sol çapraz kontrol
   function checkDiagonalLeft(grid, row, col, player) {
     let count = 1;
@@ -171,7 +167,7 @@ const Game = () => {
     }
     return count >= WINNING_LENGTH;
   }
-
+  
   // İnline CSS Stilleri
   const styles = {
     gameContainer: {
