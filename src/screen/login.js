@@ -1,7 +1,8 @@
 import React, { useState } from "react";
+import { useUser } from "../UserContext"; // UserContext'u içe aktar
 
 const Login = ({ onLogin }) => {
-  const [username, setUsername] = useState("");
+  const { username, setUsername } = useUser(); // UserContext'tan username'i al
   const [backgroundColor, setBackgroundColor] = useState("");
   const [discColor, setDiscColor] = useState("");
 
@@ -13,7 +14,8 @@ const Login = ({ onLogin }) => {
       discColor &&
       backgroundColor !== discColor
     ) {
-      localStorage.setItem("username", username);
+      // Kullanıcı adını güncelle
+      setUsername(username);
       localStorage.setItem("backgroundColor", backgroundColor);
       localStorage.setItem("discColor", discColor);
       onLogin();
@@ -70,7 +72,7 @@ const Login = ({ onLogin }) => {
           type="text"
           placeholder="Kullanıcı Adınız"
           value={username}
-          onChange={(e) => setUsername(e.target.value)}
+          onChange={(e) => setUsername(e.target.value)} // Kullanıcı adını güncelle
           style={styles.input}
         />
       </div>
