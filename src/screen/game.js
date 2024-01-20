@@ -8,7 +8,6 @@ const Game = () => {
   const [grid, setGrid] = useState(createEmptyGrid());
   const [currentPlayer, setCurrentPlayer] = useState("Red");
   const [gameOver, setGameOver] = useState(false);
-  const [winningLine, setWinningLine] = useState(null);
 
   useEffect(() => {
     if (gameOver) {
@@ -36,7 +35,6 @@ const Game = () => {
     setGrid(createEmptyGrid());
     setCurrentPlayer("Red");
     setGameOver(false);
-    setWinningLine(null); // Kazanan çizgisini sıfırla
   }
 
   function placeDisc(columnIndex) {
@@ -49,10 +47,6 @@ const Game = () => {
         setGrid(newGrid);
         if (checkForWin(newGrid, row, columnIndex, currentPlayer)) {
           setGameOver(true);
-          setWinningLine({
-            start: { row, col: columnIndex },
-            end: { row, col: columnIndex },
-          }); // Kazanan çizgisini ayarla
         } else {
           setCurrentPlayer(currentPlayer === "Red" ? "Yellow" : "Red");
         }
@@ -88,10 +82,6 @@ const Game = () => {
         setGrid(newGrid);
         if (checkForWin(newGrid, row, randomColumn, currentPlayer)) {
           setGameOver(true);
-          setWinningLine({
-            start: { row, col: randomColumn },
-            end: { row, col: randomColumn },
-          }); // Kazanan çizgisini ayarla
         } else {
           setCurrentPlayer(currentPlayer === "Red" ? "Yellow" : "Red");
         }
@@ -192,15 +182,15 @@ const Game = () => {
       marginTop: "20px",
     },
     title: {
-      fontSize: "24px",
-      marginBottom: "20px",
+      fontSize: "100px",
+      marginBottom: "40px",
     },
     gridContainer: {
       display: "flex",
       flexDirection: "column",
       alignItems: "center",
       justifyContent: "center",
-      marginBottom: "20px", // İzgara ile başlık arasına boşluk ekledik
+      marginBottom: "40px", // İzgara ile başlık arasına boşluk ekledik
     },
     grid: {
       backgroundColor: "gray", // İzgaranın arka plan rengi gri olarak ayarlandı
@@ -228,45 +218,7 @@ const Game = () => {
       cursor: "pointer",
       animation: "dropPieceAnimation 1s ease",
     }),
-    winningText: {
-      fontSize: "48px",
-      fontWeight: "bold",
-      color: "green", // Kazanıldığında metin rengini yeşil olarak ayarladık
-      position: "absolute",
-      top: "50%", // Dikey merkezleme
-      left: "50%", // Yatay merkezleme
-      transform: "translate(-50%, -50%)", // Merkezi konumlandırma
-    },
   };
-
-  // Kazanan çizgisini render et
-  function renderWinningLine() {
-    if (!winningLine) return null;
-
-    const { start, end } = winningLine;
-    const cellSize = 50;
-    const lineThickness = 10;
-
-    // Kazanan çizgisinin uzunluğunu hesapla
-    const dx = end.col - start.col;
-    const dy = end.row - start.row;
-    const length = Math.sqrt(dx * dx + dy * dy) * cellSize;
-
-    // Kazanan çizgisinin açısını hesapla
-    const angle = Math.atan2(dy, dx);
-
-    // Kazanan çizgisini döndür ve stilini ayarla
-    const style = {
-      width: length + "px",
-      height: lineThickness + "px",
-      top: start.row * cellSize + cellSize / 2 - lineThickness / 2 + "px",
-      left: start.col * cellSize + cellSize / 2 + "px",
-      transform: `rotate(${angle}rad)`,
-      transformOrigin: "0% 50%",
-    };
-
-    return <div style={{ ...styles.winningLine, ...style }} />;
-  }
 
   return (
     <div style={styles.gameContainer}>
@@ -291,7 +243,6 @@ const Game = () => {
               ))}
             </div>
           ))}
-          {renderWinningLine()} {/* Kazanan çizgisini render et */}
           {gameOver && (
             <div style={styles.winningText}>
               {gameOver === "draw" ? "Berabere!" : "Kazandın!"}
