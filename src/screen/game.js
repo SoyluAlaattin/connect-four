@@ -223,11 +223,15 @@ const Game = () => {
       alignItems: "center",
       justifyContent: "center",
       marginBottom: "40px",
+      border: "5px solid #333", // Çerçeve rengi ve kalınlığı
+      borderRadius: "10px", // Çerçeve yuvarlak köşeleri
+      boxShadow: "0px 0px 5000px rgba(0, 0, 0, 99.5)", // Gölge efekti
     },
     grid: {
       padding: "10px",
       position: "relative",
     },
+
     sideCell: {
       width: "50px",
       height: "50px",
@@ -247,7 +251,6 @@ const Game = () => {
       backgroundColor: color || "#FFFFFF",
       margin: "5px",
       cursor: "pointer",
-      animation: "dropPieceAnimation 1s ease",
       display: "flex",
       alignItems: "center",
       justifyContent: "center",
@@ -265,7 +268,8 @@ const Game = () => {
 
   return (
     <div style={styles.gameContainer}>
-      <h1 style={styles.title}>{gameName || "Connect 4"}</h1> {/* Oyun adını kullan, yoksa varsayılanı kullan */}
+      <h1 style={styles.title}>{gameName || "Connect 4"}</h1>{" "}
+      {/* Oyun adını kullan, yoksa varsayılanı kullan */}
       <div style={styles.gridContainer}>
         <div style={styles.grid}>
           {grid.map((row, rowIndex) => (

@@ -1,9 +1,15 @@
 import React, { useState, useEffect } from "react";
 
 const Login = ({ onLogin }) => {
-  const [username, setUsername] = useState(localStorage.getItem("username") || "");
-  const [backgroundColor, setBackgroundColor] = useState(localStorage.getItem("backgroundColor") || "");
-  const [gameName, setGameName] = useState(localStorage.getItem("gameName") || ""); // Oyun ismi için state ekledik
+  const [username, setUsername] = useState(
+    localStorage.getItem("username") || ""
+  );
+  const [backgroundColor, setBackgroundColor] = useState(
+    localStorage.getItem("backgroundColor") || ""
+  );
+  const [gameName, setGameName] = useState(
+    localStorage.getItem("gameName") || ""
+  ); // Oyun ismi için state ekledik
 
   const handleLogin = (e) => {
     e.preventDefault();
@@ -14,9 +20,7 @@ const Login = ({ onLogin }) => {
       localStorage.setItem("gameName", gameName);
       onLogin();
     } else {
-      alert(
-        "Lütfen tüm alanları doğru şekilde doldurunuz!"
-      );
+      alert("Lütfen tüm alanları doğru şekilde doldurunuz!");
     }
   };
 
@@ -40,7 +44,8 @@ const Login = ({ onLogin }) => {
       height: "100vh",
       padding: "20px",
     },
-    title: { // CONNECT 4 yazısının stili
+    title: {
+      // CONNECT 4 yazısının stili
       fontSize: "150px", // Font büyüklüğü
       fontWeight: "bold", // Kalın font
       marginBottom: "30px", // Alt boşluk
