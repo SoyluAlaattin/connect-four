@@ -7,10 +7,11 @@ const Login = ({ onLogin }) => {
 
   const handleLogin = (e) => {
     e.preventDefault();
-    if (username && backgroundColor && gameName) { // Oyun ismi kontrolünü ekledik
+    if (username && backgroundColor) {
       localStorage.setItem("username", username);
       localStorage.setItem("backgroundColor", backgroundColor);
-      localStorage.setItem("gameName", gameName); // Oyun ismini kaydettik
+      // Sadece oyun adını kaydediyoruz, kullanıcı adı değişmiyor
+      localStorage.setItem("gameName", gameName);
       onLogin();
     } else {
       alert(
@@ -75,7 +76,7 @@ const Login = ({ onLogin }) => {
 
   return (
     <div style={styles.loginContainer}>
-      <h1 style={styles.title}>{gameName || "CONNECT 4"}</h1> {/* Oyun ismini kullan, yoksa varsayılanı kullan */}
+      <h1 style={styles.title}>CONNECT 4</h1>
       <div style={styles.inputGroup}>
         <input
           type="text"
@@ -93,7 +94,7 @@ const Login = ({ onLogin }) => {
         />
       </div>
       <div style={styles.colorPicker}>
-        <p style={{ fontSize: "18px", fontWeight: "bold" }}>Arka Plan Rengi Seç:</p>
+        <p style={{ fontSize: "18px", fontWeight: "bold" }}>Renk seç</p>
         <input
           type="color"
           value={backgroundColor}

@@ -12,14 +12,13 @@ const Game = () => {
     localStorage.getItem("username")
   );
   const [gameHistory, setGameHistory] = useState([]);
-  const [gameName, setgameName] = useState(localStorage.getItem("gameName"));
+  const [gameName, setGameName] = useState(localStorage.getItem("gameName"));
 
   useEffect(() => {
     const savedGameHistory =
       JSON.parse(localStorage.getItem("gameHistory")) || [];
     setGameHistory(savedGameHistory);
   }, []);
-
 
   useEffect(() => {
     if (gameOver && playerName) {
@@ -266,7 +265,7 @@ const Game = () => {
 
   return (
     <div style={styles.gameContainer}>
-      <h1 style={styles.title}>Connect 4</h1>
+      <h1 style={styles.title}>{gameName || "Connect 4"}</h1> {/* Oyun adını kullan, yoksa varsayılanı kullan */}
       <div style={styles.gridContainer}>
         <div style={styles.grid}>
           {grid.map((row, rowIndex) => (
