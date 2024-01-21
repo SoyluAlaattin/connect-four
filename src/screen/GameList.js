@@ -12,19 +12,10 @@ const GameList = () => {
   }, []);
 
   const columns = [
-    { field: "id", headerName: "Sıra", width: 90 },
-    {
-      field: "player",
-      headerName: "Oyuncu",
-      width: 150,
-    },
-    {
-      field: "result",
-      headerName: "Sonuç",
-      width: 130,
-    },
+    { field: "player", headerName: "Oyuncu", width: 150 },
+    { field: "result", headerName: "Sonuç", width: 150 },
+    { field: "gameName", headerName: "Oyun Adı", width: 150 },
   ];
-
   const handleStart = () => {
     navigate("/game");
   };
@@ -64,17 +55,20 @@ const GameList = () => {
     <div style={styles.container}>
       <h1 style={styles.header}>Oyun Geçmişi</h1>
       <DataGrid
-        rows={rows.map((row, index) => ({
-          id: index + 1,
-          player: row.player,
-          result: row.result,
-        }))}
+        rows={rows
+          .map((row, index) => ({
+            id: index + 1,
+            player: row.player,
+            result: row.result,
+            gameName: row.gameName,
+          }))
+          .reverse()} // rows dizisini ters çevirin
         columns={columns}
         pageSize={5}
         rowsPerPageOptions={[5]}
-        checkboxSelection
         style={styles.dataGrid}
       />
+
       <button onClick={handleStart} style={styles.startButton}>
         Start
       </button>

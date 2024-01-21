@@ -8,35 +8,59 @@ const Game = () => {
   const [grid, setGrid] = useState(createEmptyGrid());
   const [currentPlayer, setCurrentPlayer] = useState("Player");
   const [gameOver, setGameOver] = useState(false);
-  const [playerName, setPlayerName] = useState("");
+  const [playerName, setPlayerName] = useState(
+    localStorage.getItem("username")
+  );
   const [gameHistory, setGameHistory] = useState([]);
+  const [gameName, setgameName] = useState(localStorage.getItem("gameName"));
+
+  useEffect(() => {
+    const savedGameHistory =
+      JSON.parse(localStorage.getItem("gameHistory")) || [];
+    setGameHistory(savedGameHistory);
+  }, []);
+
 
   useEffect(() => {
     if (gameOver && playerName) {
       const result =
         gameOver === "draw"
-          ? "Berabere!"
+          ? "Berabere"
           : currentPlayer === "Player"
-          ? "Kazandınız!"
-          : "Kaybettiniz!";
-      const newGame = { player: playerName, result };
-      setGameHistory([...gameHistory, newGame]);
-      localStorage.setItem(
-        "gameHistory",
-        JSON.stringify([...gameHistory, newGame])
-      );
-    }
+          ? "Kazandınız"
+          : "Kaybettiniz";
 
-    if (gameOver === "draw") {
-      setTimeout(() => {
+      // Mevcut geçmişi localStorage'dan alın
+      const storedHistory =
+        JSON.parse(localStorage.getItem("gameHistory")) || [];
+
+      // Yeni oyun sonucunu oluşturun
+      const newGame = {
+        player: playerName,
+        result,
+        gameName, // Oyun adını statik olarak ekleyin
+      };
+
+      // Mevcut geçmişi yeni oyun sonucuyla birleştirin
+      const updatedHistory = [...storedHistory, newGame];
+
+      // localStorage'a güncellenmiş geçmişi kaydedin
+      localStorage.setItem("gameHistory", JSON.stringify(updatedHistory));
+
+      // setState ile güncellenmiş geçmişi kullanın
+      setGameHistory(updatedHistory);
+
+      console.log(result);
+
+      if (gameOver === "draw") {
         resetGame();
-      }, 3000);
-    } else if (currentPlayer === "Bilgisayar" && !gameOver) {
+      }
+    } else if (currentPlayer === "Bilgisayar") {
       setTimeout(() => {
         makeComputerMove(grid);
       }, 100);
     }
-  }, [gameOver, currentPlayer, playerName, gameHistory]);
+  }, [gameOver, currentPlayer, playerName]);
 
   function createEmptyGrid() {
     return Array(ROWS)
@@ -202,12 +226,16 @@ const Game = () => {
       marginBottom: "40px",
     },
     grid: {
-      backgroundColor: "transparent",
       padding: "10px",
       position: "relative",
     },
     sideCell: {
-      display: "none",
+      width: "50px",
+      height: "50px",
+      border: "1px solid black",
+      borderRadius: "50%",
+      backgroundColor: "#FFFFFF",
+      margin: "5px",
     },
     row: {
       display: "flex",
@@ -215,12 +243,16 @@ const Game = () => {
     cell: (color) => ({
       width: "50px",
       height: "50px",
-      border: "4px solid black",
+      border: "1px solid black",
       borderRadius: "50%",
-      backgroundColor: color || "transparent",
+      backgroundColor: color || "#FFFFFF",
       margin: "5px",
       cursor: "pointer",
       animation: "dropPieceAnimation 1s ease",
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "center",
+      fontSize: "24px",
     }),
     winningText: {
       position: "absolute",
@@ -229,8 +261,6 @@ const Game = () => {
       transform: "translate(-50%, -50%)",
       fontSize: "48px",
       fontWeight: "bold",
-      color: "red",
-      textShadow: "4px 4px 4px rgba(0, 0, 0, 0.5)",
     },
   };
 

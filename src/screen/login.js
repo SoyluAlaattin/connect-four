@@ -3,12 +3,14 @@ import React, { useState, useEffect } from "react";
 const Login = ({ onLogin }) => {
   const [username, setUsername] = useState(localStorage.getItem("username") || "");
   const [backgroundColor, setBackgroundColor] = useState(localStorage.getItem("backgroundColor") || "");
+  const [gameName, setGameName] = useState(localStorage.getItem("gameName") || ""); // Oyun ismi için state ekledik
 
   const handleLogin = (e) => {
     e.preventDefault();
-    if (username && backgroundColor) {
+    if (username && backgroundColor && gameName) { // Oyun ismi kontrolünü ekledik
       localStorage.setItem("username", username);
       localStorage.setItem("backgroundColor", backgroundColor);
+      localStorage.setItem("gameName", gameName); // Oyun ismini kaydettik
       onLogin();
     } else {
       alert(
@@ -73,13 +75,20 @@ const Login = ({ onLogin }) => {
 
   return (
     <div style={styles.loginContainer}>
-      <h1 style={styles.title}>CONNECT 4</h1>
+      <h1 style={styles.title}>{gameName || "CONNECT 4"}</h1> {/* Oyun ismini kullan, yoksa varsayılanı kullan */}
       <div style={styles.inputGroup}>
         <input
           type="text"
           placeholder="Kullanıcı Adınız"
           value={username}
           onChange={(e) => setUsername(e.target.value)}
+          style={styles.input}
+        />
+        <input
+          type="text"
+          placeholder="Oyun İsmi" // Oyun ismi için input alanı ekledik
+          value={gameName}
+          onChange={(e) => setGameName(e.target.value)}
           style={styles.input}
         />
       </div>
