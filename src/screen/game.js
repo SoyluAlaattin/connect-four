@@ -6,20 +6,37 @@ const WINNING_LENGTH = 4;
 
 const Game = () => {
   const [grid, setGrid] = useState(createEmptyGrid());
-  const [currentPlayer, setCurrentPlayer] = useState("Red");
+  const [currentPlayer, setCurrentPlayer] = useState("Player");
   const [gameOver, setGameOver] = useState(false);
+  const [playerName, setPlayerName] = useState("");
+  const [gameHistory, setGameHistory] = useState([]);
 
   useEffect(() => {
+    if (gameOver && playerName) {
+      const result =
+        gameOver === "draw"
+          ? "Berabere!"
+          : currentPlayer === "Player"
+          ? "Kazandınız!"
+          : "Kaybettiniz!";
+      const newGame = { player: playerName, result };
+      setGameHistory([...gameHistory, newGame]);
+      localStorage.setItem(
+        "gameHistory",
+        JSON.stringify([...gameHistory, newGame])
+      );
+    }
+
     if (gameOver === "draw") {
-      // Oyun berabere kaldığında sadece yeniden başlat
-      resetGame();
-    } else if (currentPlayer === "Yellow" && !gameOver) {
-      // Bilgisayarın hamlesi
+      setTimeout(() => {
+        resetGame();
+      }, 3000);
+    } else if (currentPlayer === "Bilgisayar" && !gameOver) {
       setTimeout(() => {
         makeComputerMove(grid);
-      }, 100); // Bilgisayarın hamlesi 100 milisaniye sonra yapılır
+      }, 100);
     }
-  }, [gameOver, currentPlayer, grid]);
+  }, [gameOver, currentPlayer, playerName, gameHistory]);
 
   function createEmptyGrid() {
     return Array(ROWS)
@@ -29,7 +46,7 @@ const Game = () => {
 
   function resetGame() {
     setGrid(createEmptyGrid());
-    setCurrentPlayer("Red");
+    setCurrentPlayer("Player");
     setGameOver(false);
   }
 
@@ -42,9 +59,11 @@ const Game = () => {
         newGrid[row][columnIndex] = currentPlayer;
         setGrid(newGrid);
         if (checkForWin(newGrid, row, columnIndex, currentPlayer)) {
-          setGameOver(true);
+          setGameOver(currentPlayer);
         } else {
-          setCurrentPlayer(currentPlayer === "Red" ? "Yellow" : "Red");
+          setCurrentPlayer(
+            currentPlayer === "Player" ? "Bilgisayar" : "Player"
+          );
         }
         break;
       }
@@ -54,7 +73,6 @@ const Game = () => {
   function makeComputerMove(grid) {
     if (gameOver) return;
 
-    // Rastgele bir sütun seç
     const availableColumns = [];
     for (let col = 0; col < COLUMNS; col++) {
       if (!grid[0][col]) {
@@ -63,8 +81,7 @@ const Game = () => {
     }
 
     if (availableColumns.length === 0) {
-      // Oyun berabere
-      setGameOver("draw"); // Oyun berabere durumunu ayarla
+      setGameOver("draw");
       return;
     }
 
@@ -77,17 +94,18 @@ const Game = () => {
         newGrid[row][randomColumn] = currentPlayer;
         setGrid(newGrid);
         if (checkForWin(newGrid, row, randomColumn, currentPlayer)) {
-          setGameOver(true);
+          setGameOver("Kaybetti");
         } else {
-          setCurrentPlayer(currentPlayer === "Red" ? "Yellow" : "Red");
+          setCurrentPlayer(
+            currentPlayer === "Player" ? "Bilgisayar" : "Player"
+          );
         }
         break;
       }
     }
   }
 
- // Kazananı kontrol et
-function checkForWin(grid, row, col, player) {
+  function checkForWin(grid, row, col, player) {
     return (
       checkVertical(grid, row, col, player) ||
       checkHorizontal(grid, row, col, player) ||
@@ -95,8 +113,7 @@ function checkForWin(grid, row, col, player) {
       checkDiagonalLeft(grid, row, col, player)
     );
   }
-  
-  // Dikey kontrol
+
   function checkVertical(grid, row, col, player) {
     let count = 1;
     let r = row + 1;
@@ -111,8 +128,7 @@ function checkForWin(grid, row, col, player) {
     }
     return count >= WINNING_LENGTH;
   }
-  
-  // Yatay kontrol
+
   function checkHorizontal(grid, row, col, player) {
     let count = 1;
     let c = col + 1;
@@ -127,8 +143,7 @@ function checkForWin(grid, row, col, player) {
     }
     return count >= WINNING_LENGTH;
   }
-  
-  // Sağ çapraz kontrol
+
   function checkDiagonalRight(grid, row, col, player) {
     let count = 1;
     let r = row + 1;
@@ -147,8 +162,7 @@ function checkForWin(grid, row, col, player) {
     }
     return count >= WINNING_LENGTH;
   }
-  
-  // Sol çapraz kontrol
+
   function checkDiagonalLeft(grid, row, col, player) {
     let count = 1;
     let r = row + 1;
@@ -167,8 +181,7 @@ function checkForWin(grid, row, col, player) {
     }
     return count >= WINNING_LENGTH;
   }
-  
-  // İnline CSS Stilleri
+
   const styles = {
     gameContainer: {
       display: "flex",
@@ -186,20 +199,15 @@ function checkForWin(grid, row, col, player) {
       flexDirection: "column",
       alignItems: "center",
       justifyContent: "center",
-      marginBottom: "40px", // İzgara ile başlık arasına boşluk ekledik
+      marginBottom: "40px",
     },
     grid: {
-      backgroundColor: "gray", // İzgaranın arka plan rengi gri olarak ayarlandı
-      padding: "10px", // İzgaraya biraz iç boşluk ekledik
-      position: "relative", // Kazanan çizgisini konumlandırmak için gerekli
+      backgroundColor: "transparent",
+      padding: "10px",
+      position: "relative",
     },
     sideCell: {
-      width: "50px",
-      height: "50px",
-      border: "1px solid black",
-      borderRadius: "50%",
-      backgroundColor: "#FFFFFF",
-      margin: "5px",
+      display: "none",
     },
     row: {
       display: "flex",
@@ -207,13 +215,23 @@ function checkForWin(grid, row, col, player) {
     cell: (color) => ({
       width: "50px",
       height: "50px",
-      border: "1px solid black",
+      border: "4px solid black",
       borderRadius: "50%",
-      backgroundColor: color || "#FFFFFF",
+      backgroundColor: color || "transparent",
       margin: "5px",
       cursor: "pointer",
       animation: "dropPieceAnimation 1s ease",
     }),
+    winningText: {
+      position: "absolute",
+      top: "50%",
+      left: "50%",
+      transform: "translate(-50%, -50%)",
+      fontSize: "48px",
+      fontWeight: "bold",
+      color: "red",
+      textShadow: "4px 4px 4px rgba(0, 0, 0, 0.5)",
+    },
   };
 
   return (
@@ -227,9 +245,9 @@ function checkForWin(grid, row, col, player) {
                 <div
                   key={columnIndex}
                   style={styles.cell(
-                    cell === "Red"
+                    cell === "Player"
                       ? "red"
-                      : cell === "Yellow"
+                      : cell === "Bilgisayar"
                       ? "yellow"
                       : undefined
                   )}
@@ -241,7 +259,11 @@ function checkForWin(grid, row, col, player) {
           ))}
           {gameOver && (
             <div style={styles.winningText}>
-              {gameOver === "draw" ? "Berabere!" : "Kazandın!"}
+              {gameOver === "draw"
+                ? "Berabere!"
+                : gameOver === "Player"
+                ? "Kazandınız!"
+                : "Kaybettiniz!"}
             </div>
           )}
         </div>

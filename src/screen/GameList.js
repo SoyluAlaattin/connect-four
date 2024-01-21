@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { DataGrid } from '@mui/x-data-grid';
+import { DataGrid } from "@mui/x-data-grid";
 import { useNavigate } from "react-router-dom";
 
 const GameList = () => {
@@ -17,7 +17,6 @@ const GameList = () => {
       field: "player",
       headerName: "Oyuncu",
       width: 150,
-      valueGetter: (params) => `${params.row.playerName} VS Bilgisayar`,
     },
     {
       field: "result",
@@ -32,7 +31,7 @@ const GameList = () => {
 
   const styles = {
     container: {
-      height: "calc(100vh - 60px)", // Ekrandan biraz daha az yükseklik
+      height: "calc(100vh - 60px)",
       width: "100%",
       padding: "20px",
       display: "flex",
@@ -65,7 +64,11 @@ const GameList = () => {
     <div style={styles.container}>
       <h1 style={styles.header}>Oyun Geçmişi</h1>
       <DataGrid
-        rows={rows}
+        rows={rows.map((row, index) => ({
+          id: index + 1,
+          player: row.player,
+          result: row.result,
+        }))}
         columns={columns}
         pageSize={5}
         rowsPerPageOptions={[5]}
