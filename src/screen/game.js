@@ -65,7 +65,7 @@ const Game = () => {
     } else if (currentPlayer === "Bilgisayar" && !gameOver) {
       setTimeout(() => {
         makeComputerMove(grid);
-      }, 100);
+      }, 500);
     }
   }, [gameOver, currentPlayer]);
 
