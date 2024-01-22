@@ -16,6 +16,9 @@ const Game = () => {
   const [playerColor, setPlayerColor] = useState(
     localStorage.getItem("playerColor")
   );
+  const [backgroundColor, setBackgroundColor] = useState(
+    localStorage.getItem("backgroundColor")
+  );
 
   function checkForDraw(grid) {
     return grid.every((row) => row.every((cell) => cell !== null));
@@ -281,7 +284,7 @@ const Game = () => {
   return (
     <div style={styles.gameContainer}>
       <h1 style={styles.title}>{gameName || "Connect 4"}</h1>
-      <div style={styles.gridContainer}>
+      <div style={{ backgroundColor: backgroundColor }}>
         <div style={styles.grid}>
           {grid.map((row, rowIndex) => (
             <div key={rowIndex} style={styles.row}>

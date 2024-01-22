@@ -29,7 +29,7 @@ const Login = ({ onLogin }) => {
   };
 
   const updateBackgroundColor = (color) => {
-    document.body.style.backgroundColor = color;
+    document.body.style.backgroundColor = "grey";
   };
   const updatePlayerColor = (color) => {
     document.body.style.playerColor = color;
