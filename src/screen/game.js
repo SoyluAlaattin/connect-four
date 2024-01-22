@@ -13,6 +13,10 @@ const Game = () => {
   );
   const [gameHistory, setGameHistory] = useState([]);
   const [gameName, setGameName] = useState(localStorage.getItem("gameName"));
+  const [playerColor, setPlayerColor] = useState(
+    localStorage.getItem("playerColor")
+  );
+
   function checkForDraw(grid) {
     return grid.every((row) => row.every((cell) => cell !== null));
   }
@@ -214,8 +218,6 @@ const Game = () => {
     return count >= WINNING_LENGTH;
   }
 
-
-
   const styles = {
     gameContainer: {
       display: "flex",
@@ -278,8 +280,6 @@ const Game = () => {
 
   return (
     <div style={styles.gameContainer}>
-     
-
       <h1 style={styles.title}>{gameName || "Connect 4"}</h1>
       <div style={styles.gridContainer}>
         <div style={styles.grid}>
@@ -290,9 +290,9 @@ const Game = () => {
                   key={columnIndex}
                   style={styles.cell(
                     cell === "Player"
-                      ? "red"
+                      ? playerColor
                       : cell === "Bilgisayar"
-                      ? "yellow"
+                      ? "black"
                       : undefined
                   )}
                   onClick={() => placeDisc(columnIndex)}

@@ -9,13 +9,17 @@ const Login = ({ onLogin }) => {
   );
   const [gameName, setGameName] = useState(
     localStorage.getItem("gameName") || ""
+  );
+  const [playerColor, setPlayerColor] = useState(
+    localStorage.getItem("playerColor") || ""
   ); // Oyun ismi için state ekledik
 
   const handleLogin = (e) => {
     e.preventDefault();
-    if (username && backgroundColor) {
+    if (username && backgroundColor && playerColor) {
       localStorage.setItem("username", username);
       localStorage.setItem("backgroundColor", backgroundColor);
+      localStorage.setItem("playerColor", playerColor);
       // Sadece oyun adını kaydediyoruz, kullanıcı adı değişmiyor
       localStorage.setItem("gameName", gameName);
       onLogin();
@@ -27,11 +31,18 @@ const Login = ({ onLogin }) => {
   const updateBackgroundColor = (color) => {
     document.body.style.backgroundColor = color;
   };
+  const updatePlayerColor = (color) => {
+    document.body.style.playerColor = color;
+  };
 
   useEffect(() => {
     const savedBackgroundColor = localStorage.getItem("backgroundColor");
+    const savedPlayerColor = localStorage.getItem("playerColor");
     if (savedBackgroundColor) {
       updateBackgroundColor(savedBackgroundColor);
+    }
+    if (savedPlayerColor) {
+      updatePlayerColor(savedPlayerColor);
     }
   }, []);
 
@@ -106,6 +117,17 @@ const Login = ({ onLogin }) => {
           onChange={(e) => {
             setBackgroundColor(e.target.value);
             updateBackgroundColor(e.target.value);
+          }}
+        />
+      </div>
+      <div style={styles.colorPicker}>
+        <p style={{ fontSize: "18px", fontWeight: "bold" }}>Disk Rengi seç</p>
+        <input
+          type="color"
+          value={playerColor}
+          onChange={(e) => {
+            setPlayerColor(e.target.value);
+            updatePlayerColor(e.target.value);
           }}
         />
       </div>
