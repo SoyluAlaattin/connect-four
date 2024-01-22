@@ -13,7 +13,9 @@ const Game = () => {
   );
   const [gameHistory, setGameHistory] = useState([]);
   const [gameName, setGameName] = useState(localStorage.getItem("gameName"));
-
+  function checkForDraw(grid) {
+    return grid.every((row) => row.every((cell) => cell !== null));
+  }
   useEffect(() => {
     const savedGameHistory =
       JSON.parse(localStorage.getItem("gameHistory")) || [];
@@ -21,6 +23,15 @@ const Game = () => {
   }, []);
 
   useEffect(() => {
+    console.log(grid);
+  }, [grid]);
+
+  useEffect(() => {
+    if (gameOver === "draw") {
+      setTimeout(() => {
+        resetGame();
+      }, 2000); // 2 saniye sonra sıfırla
+    }
     if (gameOver && playerName) {
       const result =
         gameOver === "draw"
@@ -29,37 +40,27 @@ const Game = () => {
           ? "Kazandınız"
           : "Kaybettiniz";
 
-      // Mevcut geçmişi localStorage'dan alın
       const storedHistory =
         JSON.parse(localStorage.getItem("gameHistory")) || [];
 
-      // Yeni oyun sonucunu oluşturun
       const newGame = {
         player: playerName,
         result,
-        gameName, // Oyun adını statik olarak ekleyin
+        gameName,
       };
 
-      // Mevcut geçmişi yeni oyun sonucuyla birleştirin
       const updatedHistory = [...storedHistory, newGame];
 
-      // localStorage'a güncellenmiş geçmişi kaydedin
       localStorage.setItem("gameHistory", JSON.stringify(updatedHistory));
-
-      // setState ile güncellenmiş geçmişi kullanın
       setGameHistory(updatedHistory);
 
       console.log(result);
-
-      if (gameOver === "draw") {
-        resetGame();
-      }
-    } else if (currentPlayer === "Bilgisayar") {
+    } else if (currentPlayer === "Bilgisayar" && !gameOver) {
       setTimeout(() => {
         makeComputerMove(grid);
       }, 100);
     }
-  }, [gameOver, currentPlayer, playerName]);
+  }, [gameOver, currentPlayer]);
 
   function createEmptyGrid() {
     return Array(ROWS)
@@ -83,6 +84,9 @@ const Game = () => {
         setGrid(newGrid);
         if (checkForWin(newGrid, row, columnIndex, currentPlayer)) {
           setGameOver(currentPlayer);
+        } else if (checkForDraw(newGrid)) {
+          // Beraberlik kontrolü eklendi
+          setGameOver("draw");
         } else {
           setCurrentPlayer(
             currentPlayer === "Player" ? "Bilgisayar" : "Player"
@@ -116,13 +120,18 @@ const Game = () => {
         const newGrid = grid.map((row) => [...row]);
         newGrid[row][randomColumn] = currentPlayer;
         setGrid(newGrid);
+
+        // Kazanma ve beraberlik kontrolü
         if (checkForWin(newGrid, row, randomColumn, currentPlayer)) {
           setGameOver("Kaybetti");
+        } else if (checkForDraw(newGrid)) {
+          setGameOver("draw");
         } else {
           setCurrentPlayer(
             currentPlayer === "Player" ? "Bilgisayar" : "Player"
           );
         }
+
         break;
       }
     }
@@ -205,6 +214,8 @@ const Game = () => {
     return count >= WINNING_LENGTH;
   }
 
+
+
   const styles = {
     gameContainer: {
       display: "flex",
@@ -223,15 +234,14 @@ const Game = () => {
       alignItems: "center",
       justifyContent: "center",
       marginBottom: "40px",
-      border: "5px solid #333", // Çerçeve rengi ve kalınlığı
-      borderRadius: "10px", // Çerçeve yuvarlak köşeleri
-      boxShadow: "0px 0px 5000px rgba(0, 0, 0, 99.5)", // Gölge efekti
+      border: "5px solid #333",
+      borderRadius: "10px",
+      boxShadow: "0px 0px 5000px rgba(0, 0, 0, 99.5)",
     },
     grid: {
       padding: "10px",
       position: "relative",
     },
-
     sideCell: {
       width: "50px",
       height: "50px",
@@ -268,8 +278,9 @@ const Game = () => {
 
   return (
     <div style={styles.gameContainer}>
-      <h1 style={styles.title}>{gameName || "Connect 4"}</h1>{" "}
-      {/* Oyun adını kullan, yoksa varsayılanı kullan */}
+     
+
+      <h1 style={styles.title}>{gameName || "Connect 4"}</h1>
       <div style={styles.gridContainer}>
         <div style={styles.grid}>
           {grid.map((row, rowIndex) => (

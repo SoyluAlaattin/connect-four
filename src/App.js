@@ -8,6 +8,7 @@ import {
 import Login from "./screen/login";
 import GameList from "./screen/GameList";
 import Game from "./screen/game"; // Game bileşenini import edin
+import { Toaster } from "react-hot-toast";
 
 const App = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -18,6 +19,8 @@ const App = () => {
 
   return (
     <Router>
+      <Toaster />
+
       <Routes>
         <Route
           path="/login"
