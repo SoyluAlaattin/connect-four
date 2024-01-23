@@ -242,7 +242,7 @@ const Game = () => {
     },
     title: {
       fontSize: "100px",
-      marginBottom: "40px",
+      marginBottom: "10px",
     },
     gridContainer: {
       display: "flex",
@@ -255,7 +255,7 @@ const Game = () => {
       boxShadow: "0px 0px 5000px rgba(0, 0, 0, 99.5)",
     },
     grid: {
-      padding: "20px",
+      padding: "10px",
       position: "relative",
     },
     sideCell: {
