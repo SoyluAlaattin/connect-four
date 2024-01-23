@@ -121,7 +121,7 @@ const Login = ({ onLogin }) => {
         />
       </div>
       <div style={styles.colorPicker}>
-        <p style={{ fontSize: "18px", fontWeight: "bold" }}>COLOR</p>
+        <p style={{ fontSize: "18px", fontWeight: "bold" }}>GAMER COLOR</p>
         <input
           type="color"
           value={playerColor}
