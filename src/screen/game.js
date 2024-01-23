@@ -53,10 +53,10 @@ const Game = () => {
     if (gameOver && playerName) {
       const result =
         gameOver === "draw"
-          ? "Berabere"
+          ? "DRAW"
           : currentPlayer === "Player"
-          ? "kazandınız"
-          : "Kaybettiniz";
+          ? "WİNNER"
+          : "GAME OVER";
 
       const storedHistory =
         JSON.parse(localStorage.getItem("gameHistory")) || [];
@@ -255,7 +255,7 @@ const Game = () => {
       boxShadow: "0px 0px 5000px rgba(0, 0, 0, 99.5)",
     },
     grid: {
-      padding: "10px",
+      padding: "20px",
       position: "relative",
     },
     sideCell: {
@@ -287,7 +287,7 @@ const Game = () => {
       top: "50%",
       left: "50%",
       transform: "translate(-50%, -50%)",
-      fontSize: "48px",
+      fontSize: "60px",
       fontWeight: "bold",
     },
   };
@@ -315,10 +315,10 @@ const Game = () => {
           {gameOver && (
             <div style={styles.winningText}>
               {gameOver === "draw"
-                ? "Berabere!"
+                ? "DRAW!"
                 : gameOver === "Player"
-                ? "Kazandınız!"
-                : "Kaybettiniz!"}
+                ? "WİNNER!"
+                : "GAMEOVER!"}
             </div>
           )}
         </div>
