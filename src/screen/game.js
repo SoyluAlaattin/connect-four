@@ -269,6 +269,7 @@ const Game = () => {
     row: {
       display: "flex",
     },
+    
     cell: (color) => ({
       width: "50px",
       height: "50px",
