@@ -36,7 +36,7 @@ const GameList = () => {
     },
     dataGrid: {
       height: 400,
-      width: "100%",
+      width: "70%",
       backgroundColor: "#fff",
       margin: "20px 0",
     },

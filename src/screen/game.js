@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import toast, { Toaster } from 'react-hot-toast';
 
 const ROWS = 6;
 const COLUMNS = 7;
@@ -19,6 +20,15 @@ const Game = () => {
   const [backgroundColor, setBackgroundColor] = useState(
     localStorage.getItem("backgroundColor")
   );
+
+  useEffect(() => {
+    if (gameOver) {
+      toast.loading('PLEASE REFRESH THE PAGE TO START THE NEW GAME', {
+        position: 'top-center',
+        duration: 7000,
+      });
+    }
+  }, [gameOver]);
 
   function checkForDraw(grid) {
     return grid.every((row) => row.every((cell) => cell !== null));
@@ -66,7 +76,7 @@ const Game = () => {
     } else if (currentPlayer === "Bilgisayar" && !gameOver) {
       setTimeout(() => {
         makeComputerMove(grid);
-      }, 500);
+      }, 300);
     }
   }, [gameOver, currentPlayer]);
 
@@ -284,6 +294,7 @@ const Game = () => {
 
   return (
     <div style={styles.gameContainer}>
+      <Toaster />
       <h1 style={styles.title}>{gameName || "Connect 4"}</h1>
       <div style={{ backgroundColor: backgroundColor }}>
         <div style={styles.grid}>
@@ -293,11 +304,7 @@ const Game = () => {
                 <div
                   key={columnIndex}
                   style={styles.cell(
-                    cell === "Player"
-                      ? playerColor
-                      : cell === "Bilgisayar"
-                      ? "black"
-                      : undefined
+                    cell === "Player" ? playerColor : cell === "Bilgisayar" ? "black" : undefined
                   )}
                   onClick={() => placeDisc(columnIndex)}
                   className={cell === null ? "droppingPiece" : ""}
@@ -308,10 +315,10 @@ const Game = () => {
           {gameOver && (
             <div style={styles.winningText}>
               {gameOver === "draw"
-                ? "DRAW!"
+                ? "Berabere!"
                 : gameOver === "Player"
-                ? "WİNNER!"
-                : "GAME OVER!"}
+                ? "Kazandınız!"
+                : "Kaybettiniz!"}
             </div>
           )}
         </div>
