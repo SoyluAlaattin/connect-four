@@ -12,9 +12,9 @@ const GameList = () => {
   }, []);
 
   const columns = [
-    { field: "player", headerName: "Oyuncu", width: 150 },
-    { field: "result", headerName: "Sonuç", width: 150 },
-    { field: "gameName", headerName: "Oyun Adı", width: 150 },
+    { field: "player", headerName: "PLAYER", width: 150 },
+    { field: "result", headerName: "RESULT", width: 150 },
+    { field: "gameName", headerName: "GAME NAME", width: 150 },
   ];
   const handleStart = () => {
     navigate("/game");
@@ -53,7 +53,8 @@ const GameList = () => {
 
   return (
     <div style={styles.container}>
-      <h1 style={styles.header}>Oyun Geçmişi</h1>
+      <h1 style={styles.header}>GAME HISTORY
+</h1>
       <DataGrid
         rows={rows
           .map((row, index) => ({

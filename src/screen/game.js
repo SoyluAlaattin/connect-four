@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 const ROWS = 6;
 const COLUMNS = 7;
@@ -23,6 +24,15 @@ const Game = () => {
   function checkForDraw(grid) {
     return grid.every((row) => row.every((cell) => cell !== null));
   }
+  const navigate = useNavigate();
+
+  const handleLoginNavigation = () => {
+    navigate("/login");
+  };
+
+  const handleListNavigation = () => {
+    navigate("/games");
+  };
   useEffect(() => {
     const savedGameHistory =
       JSON.parse(localStorage.getItem("gameHistory")) || [];
@@ -181,6 +191,12 @@ const Game = () => {
       c--;
     }
     return count >= WINNING_LENGTH;
+  }
+  function handleLogin() {
+    window.location.href = "/login";
+  }
+  function handleList() {
+    window.location.href = "/games";
   }
 
   function checkDiagonalRight(grid, row, col, player) {

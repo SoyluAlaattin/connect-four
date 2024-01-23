@@ -52,8 +52,8 @@ const Login = ({ onLogin }) => {
       flexDirection: "column",
       alignItems: "center",
       justifyContent: "center",
-      height: "100vh",
-      padding: "20px",
+      height: "80vh",
+      padding: "0px",
     },
     title: {
       // CONNECT 4 yazısının stili
@@ -96,21 +96,21 @@ const Login = ({ onLogin }) => {
       <div style={styles.inputGroup}>
         <input
           type="text"
-          placeholder="Kullanıcı Adınız"
+          placeholder="USER NAME"
           value={username}
           onChange={(e) => setUsername(e.target.value)}
           style={styles.input}
         />
         <input
           type="text"
-          placeholder="Oyun İsmi" // Oyun ismi için input alanı ekledik
+          placeholder="GAME NAME" // Oyun ismi için input alanı ekledik
           value={gameName}
           onChange={(e) => setGameName(e.target.value)}
           style={styles.input}
         />
       </div>
       <div style={styles.colorPicker}>
-        <p style={{ fontSize: "18px", fontWeight: "bold" }}>Renk seç</p>
+        <p style={{ fontSize: "18px", fontWeight: "bold" }}>BOARD COLOR</p>
         <input
           type="color"
           value={backgroundColor}
@@ -121,7 +121,7 @@ const Login = ({ onLogin }) => {
         />
       </div>
       <div style={styles.colorPicker}>
-        <p style={{ fontSize: "18px", fontWeight: "bold" }}>Disk Rengi seç</p>
+        <p style={{ fontSize: "18px", fontWeight: "bold" }}>COLOR</p>
         <input
           type="color"
           value={playerColor}
@@ -132,7 +132,7 @@ const Login = ({ onLogin }) => {
         />
       </div>
       <button onClick={handleLogin} style={styles.button}>
-        Devam Et
+      CONTINUE
       </button>
     </div>
   );

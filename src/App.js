@@ -7,7 +7,7 @@ import {
 } from "react-router-dom";
 import Login from "./screen/login";
 import GameList from "./screen/GameList";
-import Game from "./screen/game"; // Game bileşenini import edin
+import Game from "./screen/game";
 import { Toaster } from "react-hot-toast";
 
 const App = () => {
@@ -16,11 +16,14 @@ const App = () => {
   const handleLogin = () => {
     setIsLoggedIn(true);
   };
+  const handleLogout = () => {
+    setIsLoggedIn(false);
+  };
+
 
   return (
     <Router>
       <Toaster />
-
       <Routes>
         <Route
           path="/login"
@@ -40,8 +43,8 @@ const App = () => {
           path="/game"
           element={isLoggedIn ? <Game /> : <Navigate replace to="/login" />}
         />
-
         <Route path="/" element={<Navigate replace to="/login" />} />
+        
       </Routes>
     </Router>
   );
