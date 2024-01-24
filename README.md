@@ -41,11 +41,41 @@ You don't have to ever use `eject`. The curated feature set is suitable for smal
 
 
 
-![Oyun Ekranı](./public/images/login.png) 
-**login.js**
+![Login Screen](./public/images/login.png) 
+
+**login screen**
 
 - State management for username, background color, game name, and player color using 'useState' hooks.
 - The 'handleLogin' function saves the login information to 'localStorage' and completes the login process when the form is submitted.
 - Background and player colors are retrieved and applied from 'localStorage' using the 'useEffect' hook on page load.
 - The user interface is constructed within React JSX with style definitions.
 
+
+![GameList Screen](./public/images/GameList.png) 
+
+**GameList screen**
+
+- The game history is managed with a 'useState' hook and initialized with data from 'localSt0orage'.
+- The 'useEffect' hook is used to fetch the game history from 'localStorage' when the component loads.
+- The game history is displayed in a table using the 'DataGrid' component.
+- There's a button to start a new game, which redirects the user to the '/game' route.
+
+
+![GameList Screen](./public/images/game.png)
+
+**Game Screen**
+
+- Game board, player status, end-game conditions, and other game-related variables are managed with 'useState' hooks.
+- Logic for winning, drawing, and making moves in the game is implemented through various functions.
+- When the game ends, the game state is saved to 'localStorage' and tracked with 'useEffect' hooks.
+- The game's visual interface is created with JSX and includes various CSS-in-JS style definitions.
+
+
+**App.js**
+
+- Manages user session state using useState.
+- Implements routing to paths like /login, /games, and /game using React Router.
+- Displays different pages or redirects to specific routes based on the user's login status.
+- Includes Login, GameList, and Game components and renders them on appropriate routes.
+
+**Each file represents a different aspect of your React application, and together they create a comprehensive system allowing users to play games, view their game history, and make various settings.**
