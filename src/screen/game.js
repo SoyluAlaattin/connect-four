@@ -6,23 +6,24 @@ const COLUMNS = 7;
 const WINNING_LENGTH = 4;
 
 const Game = () => {
-  const [grid, setGrid] = useState(createEmptyGrid());
-  const [currentPlayer, setCurrentPlayer] = useState("Player");
-  const [gameOver, setGameOver] = useState(false);
+  const [grid, setGrid] = useState(createEmptyGrid()); // Oyun tahtasını temsil eden grid'i tutar
+  const [currentPlayer, setCurrentPlayer] = useState("Player"); // Sıradaki oyuncuyu tutar
+  const [gameOver, setGameOver] = useState(false); // Oyunun bitip bitmediğini kontrol eder
   const [playerName, setPlayerName] = useState(
     localStorage.getItem("username")
-  );
-  const [gameHistory, setGameHistory] = useState([]);
-  const [gameName, setGameName] = useState(localStorage.getItem("gameName"));
+  ); // Oyuncu adını saklar
+  const [gameHistory, setGameHistory] = useState([]); // Oyun geçmişini saklar
+  const [gameName, setGameName] = useState(localStorage.getItem("gameName")); // Oyun adını saklar
   const [playerColor, setPlayerColor] = useState(
     localStorage.getItem("playerColor")
-  );
+  ); // Oyuncu rengini saklar
   const [backgroundColor, setBackgroundColor] = useState(
     localStorage.getItem("backgroundColor")
-  );
+  ); // Arka plan rengini saklar
 
   useEffect(() => {
     if (gameOver) {
+      // Oyun bittiğinde bir toast mesajı görüntüler
       toast.loading('PLEASE REFRESH THE PAGE TO START THE NEW GAME', {
         position: 'top-center',
         duration: 7000,
@@ -31,24 +32,20 @@ const Game = () => {
   }, [gameOver]);
 
   function checkForDraw(grid) {
-    return grid.every((row) => row.every((cell) => cell !== null));
+    return grid.every((row) => row.every((cell) => cell !== null)); // Oyunun berabere olduğunu kontrol eder
   }
 
   useEffect(() => {
     const savedGameHistory =
       JSON.parse(localStorage.getItem("gameHistory")) || [];
-    setGameHistory(savedGameHistory);
+    setGameHistory(savedGameHistory); // Oyun geçmişini localStorage'dan alır ve günceller
   }, []);
-
-  useEffect(() => {
-    console.log(grid);
-  }, [grid]);
 
   useEffect(() => {
     if (gameOver === "draw") {
       setTimeout(() => {
         resetGame();
-      }, 2000); // 2 saniye sonra sıfırla
+      }, 2000); // Berabere durumunda oyunu sıfırlar
     }
     if (gameOver && playerName) {
       const result =
@@ -69,13 +66,13 @@ const Game = () => {
 
       const updatedHistory = [...storedHistory, newGame];
 
-      localStorage.setItem("gameHistory", JSON.stringify(updatedHistory));
+      localStorage.setItem("gameHistory", JSON.stringify(updatedHistory)); // Oyun geçmişini günceller
       setGameHistory(updatedHistory);
 
       console.log(result);
     } else if (currentPlayer === "Bilgisayar" && !gameOver) {
       setTimeout(() => {
-        makeComputerMove(grid);
+        makeComputerMove(grid); // Bilgisayarın hamlesini yapar
       }, 300);
     }
   }, [gameOver, currentPlayer]);
@@ -83,11 +80,11 @@ const Game = () => {
   function createEmptyGrid() {
     return Array(ROWS)
       .fill(null)
-      .map(() => Array(COLUMNS).fill(null));
+      .map(() => Array(COLUMNS).fill(null)); // Başlangıçta boş bir oyun tahtası oluşturur
   }
 
   function resetGame() {
-    setGrid(createEmptyGrid());
+    setGrid(createEmptyGrid()); // Oyunu sıfırlar
     setCurrentPlayer("Player");
     setGameOver(false);
   }
@@ -98,17 +95,16 @@ const Game = () => {
     for (let row = ROWS - 1; row >= 0; row--) {
       if (!grid[row][columnIndex]) {
         const newGrid = grid.map((row) => [...row]);
-        newGrid[row][columnIndex] = currentPlayer;
+        newGrid[row][columnIndex] = currentPlayer; // Oyuncunun taşını tahtaya koyar
         setGrid(newGrid);
         if (checkForWin(newGrid, row, columnIndex, currentPlayer)) {
-          setGameOver(currentPlayer);
+          setGameOver(currentPlayer); // Kazananı kontrol eder
         } else if (checkForDraw(newGrid)) {
-          // Beraberlik kontrolü eklendi
-          setGameOver("draw");
+          setGameOver("draw"); // Beraberlik kontrolü
         } else {
           setCurrentPlayer(
             currentPlayer === "Player" ? "Bilgisayar" : "Player"
-          );
+          ); // Sıradaki oyuncuyu değiştirir
         }
         break;
       }
@@ -139,7 +135,6 @@ const Game = () => {
         newGrid[row][randomColumn] = currentPlayer;
         setGrid(newGrid);
 
-        // Kazanma ve beraberlik kontrolü
         if (checkForWin(newGrid, row, randomColumn, currentPlayer)) {
           setGameOver("Kaybetti");
         } else if (checkForDraw(newGrid)) {
