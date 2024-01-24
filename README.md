@@ -75,7 +75,7 @@ You don't have to ever use `eject`. The curated feature set is suitable for smal
 
 ![Login Screen](./public/images/login.png) 
 
-**login screen**
+## login screen
 
 - State management for username, background color, game name, and player color using 'useState' hooks.
 - The 'handleLogin' function saves the login information to 'localStorage' and completes the login process when the form is submitted.
@@ -85,7 +85,7 @@ You don't have to ever use `eject`. The curated feature set is suitable for smal
 
 ![GameList Screen](./public/images/GameList.png) 
 
-**GameList screen**
+## GameList screen
 
 - The game history is managed with a 'useState' hook and initialized with data from 'localSt0orage'.
 - The 'useEffect' hook is used to fetch the game history from 'localStorage' when the component loads.
@@ -95,7 +95,7 @@ You don't have to ever use `eject`. The curated feature set is suitable for smal
 
 ![GameList Screen](./public/images/game.png)
 
-**Game Screen**
+## Game Screen
 
 - Game board, player status, end-game conditions, and other game-related variables are managed with 'useState' hooks.
 - Logic for winning, drawing, and making moves in the game is implemented through various functions.
@@ -103,7 +103,7 @@ You don't have to ever use `eject`. The curated feature set is suitable for smal
 - The game's visual interface is created with JSX and includes various CSS-in-JS style definitions.
 
 
-**App.js**
+## App.js
 
 - Manages user session state using useState.
 - Implements routing to paths like /login, /games, and /game using React Router.
@@ -114,5 +114,29 @@ You don't have to ever use `eject`. The curated feature set is suitable for smal
 
 
 
+# Project Structure - Domain Driven Design 
+
+my-react-project/
+├── public/                # Folder for static assets
+│   └── index.html         # Main HTML file
+├── src/                   # Folder for source files
+│   ├── screens/           # Screen components
+│   │   ├── login/         # Components for the Login screen
+│   │   │   ├── index.js   # Main file for the Login component
+│   │   │   └── styles.js  # Style file for the Login screen
+│   │   ├── gameList/      # Components for the Game List screen
+│   │   │   ├── index.js   # Main file for the Game List component
+│   │   │   └── styles.js  # Style file for the Game List screen
+│   │   └── game/          # Components for the Game screen
+│   │       ├── index.js   # Main file for the Game component
+│   │       └── styles.js  # Style file for the Game screen
+│   ├── components/        # Reusable components
+│   ├── hooks/             # Custom React hooks
+│   ├── utils/             # Utility functions
+│   ├── App.js             # Main application component
+│   └── index.js           # Entry point of the application
+├── package.json           # Project dependencies and scripts
+├── .gitignore             # Files to be ignored by Git
+└── README.md              # Project documentation
 
 
