@@ -1,4 +1,4 @@
-**JavaScript**
+**JavaScript** 
 *Node.js-React-HTML-CSS*
 
 # Connect Four Game Developed with React
@@ -6,7 +6,7 @@
 This game developed with React is a modern version of the classic board game "Connect Four." The objective of the game is to connect four tokens of the same color either horizontally, vertically, or diagonally.
 
 - Game Board and Fundamental Variables:
-The game board is represented by a 6x7 grid, implemented as a 2D array. Each cell can contain a game token or remain empty. The currentPlayer variable indicates the current player and is initially set to "Player." The gameOver variable stores whether the game has ended and its outcome.
+The game board is represented by a 6x7 grid, implemented as a 2D array. Each cell can contain a game token or remain empty. The currentPlayer variable indicates the current player and is initially set to "Player." The gameOver variable stores whether the game has ended and its outcome.You can name the game you will play, and this name will be stored in local storage.
 
 - Authentication and User Name:
 Players can perform authentication, log in, or register. The user's username is stored in local storage for the logged-in player.
@@ -50,14 +50,6 @@ Consider how your project will handle questions and answers.
 4. Data Entry and Game Logic:
 Code the logic of the Connect 4 game. Describe how to place pieces and win the game.
 Control the players' moves and how the pieces will be placed on the board.
-
-5. Intelligence Development:
-Improve the AI ​​side using ChatGPT. Have players offer strategic tips or move suggestions.
-Create a constant feedback loop to ensure ChatGPT learns how to play the game better.
-
-6. Testing and Development:
-Test your game and fix bugs.
-Regularly evaluate user feedback and ChatGPT's performance and make improvements.
 
 [ChatGPT](https://chat.openai.com/share/7938fe01-643c-46a7-bfc8-d446269c2a71)
 
