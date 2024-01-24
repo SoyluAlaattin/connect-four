@@ -115,7 +115,7 @@ You don't have to ever use `eject`. The curated feature set is suitable for smal
 
 
 # Project Structure - Domain Driven Design 
-
+...bash
 my-react-project/
 ├── public/                # Folder for static assets
 │   └── index.html         # Main HTML file
@@ -138,5 +138,5 @@ my-react-project/
 ├── package.json           # Project dependencies and scripts
 ├── .gitignore             # Files to be ignored by Git
 └── README.md              # Project documentation
-
+...
 
