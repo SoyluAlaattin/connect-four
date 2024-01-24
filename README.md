@@ -51,6 +51,8 @@ Consider how your project will handle questions and answers.
 Code the logic of the Connect 4 game. Describe how to place pieces and win the game.
 Control the players' moves and how the pieces will be placed on the board.
 
+
+`This link shows how I did part of my project with artificial intelligence.`
 [ChatGPT](https://chat.openai.com/share/7938fe01-643c-46a7-bfc8-d446269c2a71)
 
 
@@ -124,7 +126,7 @@ Control the players' moves and how the pieces will be placed on the board.
 
 
 
-# Project Structure - Domain Driven Design 
+# Project Structure
 ```bash
 
 my-react-project/
