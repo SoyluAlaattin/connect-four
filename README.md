@@ -1,3 +1,12 @@
+First of all, you can check out this game I made through this link[Connect 4](https://en.wikipedia.org/wiki/Connect_Four)
+
+Almost the entire game has been developed using artificial intelligence (OpenAI: ChatGPT-3.5,4), which means you can experiment with AI to create games, applications, websites, and many other things without needing to know any programming languages.
+
+You can start as follows: It's essential to prepare questions about your project in the finest detail for artificial intelligence!
+
+[ChatGPT](https://chat.openai.com/share/7938fe01-643c-46a7-bfc8-d446269c2a71)
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
@@ -79,3 +88,8 @@ You don't have to ever use `eject`. The curated feature set is suitable for smal
 - Includes Login, GameList, and Game components and renders them on appropriate routes.
 
 **Each file represents a different aspect of your React application, and together they create a comprehensive system allowing users to play games, view their game history, and make various settings.**
+
+
+
+
+
