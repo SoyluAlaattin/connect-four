@@ -1,6 +1,34 @@
 **JavaScript**
 *Node.js-React-HTML-CSS*
 
+# Connect Four Game Developed with React
+
+This game developed with React is a modern version of the classic board game "Connect Four." The objective of the game is to connect four tokens of the same color either horizontally, vertically, or diagonally.
+
+## Game Board and Fundamental Variables:
+The game board is represented by a 6x7 grid, implemented as a 2D array. Each cell can contain a game token or remain empty. The currentPlayer variable indicates the current player and is initially set to "Player." The gameOver variable stores whether the game has ended and its outcome.
+
+## Authentication and User Name:
+Players can perform authentication, log in, or register. The user's username is stored in local storage for the logged-in player.
+
+## Game History and Winners:
+The game history and winners are recorded and displayed using local storage. The result and player name for each game are stored.
+
+## Game Logic and Moves:
+The game logic includes functions for placing tokens on the board and checking whether the game has ended. Players take turns placing tokens on the game board. Winning and draw conditions are checked.
+
+## Playing Against the Computer:
+The game allows players to play against the computer. The computer makes moves automatically within a specific time interval.
+
+## Determining the Winner:
+The game's outcome is determined by checking horizontal, vertical, and diagonal connections. If a player connects four tokens of the same color, that player wins. If all cells are filled, and there is no winner, the game ends in a draw and is restarted.
+
+## User Interface:
+The user interface of the game is built using React components. Components for the game board, tokens, and messages for the winner are displayed. Clickable regions on the game board enable players to place tokens.
+
+## Notifications:
+Informative messages are displayed to the user when the game ends or is restarted.
+
 
 First of all, you can check out this game I made through this link[Connect 4](https://en.wikipedia.org/wiki/Connect_Four)
 
