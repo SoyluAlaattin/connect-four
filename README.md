@@ -3,11 +3,34 @@ First of all, you can check out this game I made through this link[Connect 4](ht
 Almost the entire game has been developed using artificial intelligence (OpenAI: ChatGPT-3.5,4), which means you can experiment with AI to create games, applications, websites, and many other things without needing to know any programming languages.
 
 You can start as follows: It's essential to prepare questions about your project in the finest detail for artificial intelligence!
+1. Project Design:
+Describe the basic rules and operation of the game.
+Design the game's user interface (UI) or command line interface.
+
+2. Preparing the Questions:
+Prepare questions related to your project using ChatGPT-3.5,4. Learn how to submit these questions with ChatGPT.
+Consider getting advanced answers by asking open-ended questions about the project.
+
+3. Communication with ChatGPT:
+Learn how to use the API to communicate with ChatGPT and plan how you will integrate ChatGPT with your project.
+Consider how your project will handle questions and answers.
+
+4. Data Entry and Game Logic:
+Code the logic of the Connect 4 game. Describe how to place pieces and win the game.
+Control the players' moves and how the pieces will be placed on the board.
+
+5. Intelligence Development:
+Improve the AI ​​side using ChatGPT. Have players offer strategic tips or move suggestions.
+Create a constant feedback loop to ensure ChatGPT learns how to play the game better.
+
+6. Testing and Development:
+Test your game and fix bugs.
+Regularly evaluate user feedback and ChatGPT's performance and make improvements.
 
 [ChatGPT](https://chat.openai.com/share/7938fe01-643c-46a7-bfc8-d446269c2a71)
 
 
-# Getting Started with Create React App
+# Getting Started with Create React App 
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
