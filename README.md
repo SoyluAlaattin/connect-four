@@ -1,3 +1,7 @@
+**JavaScript**
+*Node.js-React-HTML-CSS*
+
+
 First of all, you can check out this game I made through this link[Connect 4](https://en.wikipedia.org/wiki/Connect_Four)
 
 Almost the entire game has been developed using artificial intelligence (OpenAI: ChatGPT-3.5,4), which means you can experiment with AI to create games, applications, websites, and many other things without needing to know any programming languages.
