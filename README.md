@@ -5,6 +5,14 @@
 
 This game developed with React is a modern version of the classic board game "Connect Four." The objective of the game is to connect four tokens of the same color either horizontally, vertically, or diagonally.
 
+![Login Screen](./public/images/login.png) 
+## login screen
+
+- State management for username, background color, game name, and player color using 'useState' hooks.
+- The 'handleLogin' function saves the login information to 'localStorage' and completes the login process when the form is submitted.
+- Background and player colors are retrieved and applied from 'localStorage' using the 'useEffect' hook on page load.
+- The user interface is constructed within React JSX with style definitions.
+
 - Game Board and Fundamental Variables:
 The game board is represented by a 6x7 grid, implemented as a 2D array. Each cell can contain a game token or remain empty. The currentPlayer variable indicates the current player and is initially set to "Player." The gameOver variable stores whether the game has ended and its outcome.You can name the game you will play, and this name will be stored in local storage.
 
@@ -55,6 +63,16 @@ Control the players' moves and how the pieces will be placed on the board.
 `This link shows how I did part of my project with artificial intelligence.`
 [ChatGPT](https://chat.openai.com/share/7938fe01-643c-46a7-bfc8-d446269c2a71)
 
+![GameList Screen](./public/images/GameList.png) 
+
+## GameList screen
+
+- The game history is managed with a 'useState' hook and initialized with data from 'localSt0orage'.
+- The 'useEffect' hook is used to fetch the game history from 'localStorage' when the component loads.
+- The game history is displayed in a table using the 'DataGrid' component.
+- There's a button to start a new game, which redirects the user to the '/game' route.
+
+
 
 # How to Install - Step by Step Guide
 
@@ -82,27 +100,6 @@ Control the players' moves and how the pieces will be placed on the board.
   Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
 
   You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-# The interface of my game is like this, I gave brief information about the interface function.
-
-![Login Screen](./public/images/login.png) 
-
-## login screen
-
-- State management for username, background color, game name, and player color using 'useState' hooks.
-- The 'handleLogin' function saves the login information to 'localStorage' and completes the login process when the form is submitted.
-- Background and player colors are retrieved and applied from 'localStorage' using the 'useEffect' hook on page load.
-- The user interface is constructed within React JSX with style definitions.
-
-
-![GameList Screen](./public/images/GameList.png) 
-
-## GameList screen
-
-- The game history is managed with a 'useState' hook and initialized with data from 'localSt0orage'.
-- The 'useEffect' hook is used to fetch the game history from 'localStorage' when the component loads.
-- The game history is displayed in a table using the 'DataGrid' component.
-- There's a button to start a new game, which redirects the user to the '/game' route.
 
 
 ![GameList Screen](./public/images/game.png)
