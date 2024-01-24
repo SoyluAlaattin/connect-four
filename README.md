@@ -66,20 +66,20 @@ Regularly evaluate user feedback and ChatGPT's performance and make improvements
 
 1.Clone using the following repo link
 
-   GİT [GİT Clone](https://github.com/SoyluAlaattin/connect-four.git).
+   `GİT` [GİT Clone](https://github.com/SoyluAlaattin/connect-four.git).
 
 2.Go to the project folder and run npm install 
    
-  'cd my-first-project'
-  'npm install'
+  `cd my-first-project`
+  `npm install`
 
 3.Now run your app
   
-  'npm start'
+  `npm start`
    Runs the app in the development mode.\
    Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
-  'npm run eject'
+  `npm run eject`
 
   **Note: this is a one-way operation. Once you `eject`, you can't go back!**
 
